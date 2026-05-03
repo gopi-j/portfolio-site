@@ -1,22 +1,25 @@
+import Image from "next/image";
 import Link from "next/link";
+import HeaderMenu from "@/components/HeaderMenu";
 import ProjectCard from "@/components/ProjectCard";
+import ScrollReveal from "@/components/ScrollReveal";
 import Section from "@/components/Section";
 import SkillGroupCard from "@/components/SkillGroupCard";
 import TimelineItem from "@/components/TimelineItem";
 import { profile } from "@/lib/portfolio-data";
 
 const navItems = [
-  { href: "#about", label: "About" },
+  { href: "/about", label: "About" },
   { href: "#impact", label: "Impact" },
   { href: "#experience", label: "Experience" },
-  { href: "/skills", label: "Skill Pages" },
+  { href: "/skills", label: "Skills Possessed" },
   { href: "#projects", label: "Projects" },
   { href: "#contact", label: "Contact" },
 ];
 
 const impactStats = [
   { label: "Years Experience", value: "8+" },
-  { label: "Automations Delivered", value: "10+" },
+  { label: "Automations Delivered", value: "25+" },
   { label: "Manual Effort Reduced", value: "40%" },
   { label: "Engineers Mentored", value: "8" },
 ];
@@ -27,32 +30,41 @@ export default function Home() {
   return (
     <div className="site-shell">
       <header className="top-nav">
-        <a href="#home" className="brand">GJ</a>
+        <a href="#home" className="brand">RPA+AI</a>
         <nav aria-label="Portfolio sections">
-          {navItems.map((item) =>
-            item.href.startsWith("/") ? (
-              <Link key={item.href} href={item.href}>{item.label}</Link>
-            ) : (
-              <a key={item.href} href={item.href}>{item.label}</a>
-            ),
-          )}
+          <HeaderMenu items={navItems} />
         </nav>
       </header>
 
       <main id="home">
+        <ScrollReveal />
         <section className="hero reveal">
-          <p className="eyebrow">Technical Lead • Intelligent Automation</p>
-          <h1>
-            {firstName}
-            <br />
-            <span>{lastName}</span>
-          </h1>
-          <p className="lead">{profile.valueProposition}</p>
-          <p className="lead lead-secondary">{profile.audienceMessage}</p>
-          <div className="hero-cta">
-            <a href="#contact" className="btn btn-primary">Let&apos;s Connect</a>
-            <a href="/Gopi_Janjanam_Resume.pdf" className="btn btn-secondary" download>Download Resume</a>
-            <Link href="/skills" className="btn btn-ghost">View Skill Playbooks</Link>
+          <div className="hero-layout">
+            <div>
+              <p className="eyebrow">Technical Lead • Intelligent Automation</p>
+              <h1>
+                {firstName}
+                <br />
+                <span>{lastName}</span>
+              </h1>
+              <p className="lead">{profile.valueProposition}</p>
+              <p className="lead lead-secondary">{profile.audienceMessage}</p>
+              <div className="hero-cta">
+                <a href="#contact" className="btn btn-primary">Let&apos;s Connect</a>
+                <a href="/Gopi_Janjanam_Resume.pdf" className="btn btn-secondary" download>Download Resume</a>
+                <Link href="/skills" className="btn btn-ghost">View Skill Playbooks</Link>
+              </div>
+            </div>
+            <div className="hero-photo-wrap">
+              <Image
+                src="/profile.jpg"
+                alt="Gopi Janjanam"
+                width={420}
+                height={560}
+                priority
+                className="hero-photo"
+              />
+            </div>
           </div>
         </section>
 

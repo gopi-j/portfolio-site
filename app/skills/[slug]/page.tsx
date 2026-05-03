@@ -1,9 +1,18 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ScrollReveal from "@/components/ScrollReveal";
+import HeaderMenu from "@/components/HeaderMenu";
 import { getCapabilityBySlug, profile } from "@/lib/portfolio-data";
 
 type SkillDetailPageProps = {
   params: Promise<{ slug: string }>;
+};
+
+const logoBySlug: Record<string, string> = {
+  uipath: "/uipath-logo.jpeg",
+  "automation-anywhere": "/aa-logo.png",
+  "ai-rag-copilot": "/ai-agent.jpeg",
 };
 
 export function generateStaticParams() {
@@ -20,17 +29,29 @@ export default async function SkillDetailPage({ params }: SkillDetailPageProps) 
     <div className="site-shell skill-page-shell">
       <header className="top-nav">
         <Link href="/" className="brand">
-          GJ
+          RPA+AI
         </Link>
         <nav aria-label="Skill detail navigation">
-          <Link href="/skills">All Skills</Link>
-          <Link href="/">Home</Link>
+          <HeaderMenu items={[{ href: "/", label: "Home" }, { href: "/about", label: "About" }, { href: "/skills", label: "Skills Possessed" }]} />
         </nav>
       </header>
 
       <main>
+        <ScrollReveal />
         <section className="hero reveal">
           <p className="eyebrow">Skill Detail</p>
+          {logoBySlug[capability.slug] ? (
+            <div className="skill-logo-wrap skill-logo-wrap-detail">
+              <Image
+                src={logoBySlug[capability.slug]}
+                alt={`${capability.skill} logo`}
+                width={220}
+                height={95}
+                className="skill-logo"
+                priority
+              />
+            </div>
+          ) : null}
           <h1>{capability.skill}</h1>
           <p className="lead">{capability.oneLineValue}</p>
         </section>

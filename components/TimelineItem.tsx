@@ -12,7 +12,10 @@ export default function TimelineItem({ item, step }: TimelineItemProps) {
   const side = step % 2 === 0 ? "right" : "left";
 
   return (
-    <article className={`timeline-item ${stepColor} ${side}`}>
+    <article
+      className={`timeline-item ${stepColor} ${side} reveal`}
+      data-reveal-delay={String(step * 140)}
+    >
       <span className="climber" aria-hidden="true">
         🧗
       </span>
